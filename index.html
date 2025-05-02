@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A professional Markdown editor with extensive customization options">
+    <title>Markdown Editor | Customizable Preview</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <header role="banner">
+        <nav role="navigation" aria-label="Main navigation">
+            <div class="logo" role="heading" aria-level="1">Markdown Editor</div>
+            <div class="nav-controls">
+                <button id="theme-toggle" aria-label="Toggle theme" class="icon-button">
+                    <span class="theme-icon">🌓</span>
+                </button>
+                <button id="preview-btn" class="button" aria-label="Preview in new window">Preview</button>
+                <button id="save-btn" class="button" aria-label="Save content">Save</button>
+                <button id="clear-btn" class="button" aria-label="Clear editor">Clear</button>
+            </div>
+        </nav>
+    </header>
+
+    <main role="main">
+        <div class="editor-container">
+            <section class="editor-section" aria-labelledby="editor-label">
+                <h2 id="editor-label">Write Markdown</h2>
+                <div class="editor-wrapper">
+                    <textarea 
+                        id="markdown-editor" 
+                        class="editor" 
+                        placeholder="Write your markdown here..."
+                        aria-label="Markdown editor"
+                        spellcheck="true"
+                        autofocus
+                    ></textarea>
+                </div>
+            </section>
+
+            <section class="preview-section" aria-labelledby="preview-label">
+                <h2 id="preview-label">Preview</h2>
+                <div class="preview-wrapper">
+                    <div id="markdown-preview" class="preview markdown-content" role="document">
+                        <!-- Preview will be rendered here -->
+                    </div>
+                </div>
+            </section>
+
+            <section class="controls-section" aria-labelledby="controls-label">
+                <h2 id="controls-label">Customization</h2>
+                <div class="controls-wrapper">
+                    <!-- Font Controls -->
+                    <div class="control-group">
+                        <h3>Font Settings</h3>
+                        <div class="control">
+                            <label for="font-family">Font Family</label>
+                            <select id="font-family">
+                                <option value="Patrick Hand">Patrick Hand</option>
+                                <option value="Arial">Arial</option>
+                                <option value="Times New Roman">Times New Roman</option>
+                                <option value="Verdana">Verdana</option>
+                                <option value="Georgia">Georgia</option>
+                            </select>
+                        </div>
+                        <div class="control">
+                            <label for="font-size">Font Size (px)</label>
+                            <input type="number" id="font-size" min="8" max="72" value="16">
+                        </div>
+                    </div>
+
+                    <!-- Color Controls -->
+                    <div class="control-group">
+                        <h3>Color Settings</h3>
+                        <div class="control">
+                            <label for="bg-color">Background Color</label>
+                            <input type="color" id="bg-color" value="#ffffff">
+                        </div>
+                        <div class="control">
+                            <label for="text-color">Text Color</label>
+                            <input type="color" id="text-color" value="#000000">
+                        </div>
+                        <div class="control">
+                            <label for="bold-color">Bold Text Color</label>
+                            <input type="color" id="bold-color" value="#000000">
+                        </div>
+                        <div class="control">
+                            <label for="link-color">Link Color</label>
+                            <input type="color" id="link-color" value="#3498db">
+                        </div>
+                    </div>
+
+                    <!-- Header Controls -->
+                    <div class="control-group">
+                        <h3>Header Settings</h3>
+                        <div class="control">
+                            <label for="h1-color">H1 Color</label>
+                            <input type="color" id="h1-color" value="#2c3e50">
+                        </div>
+                        <div class="control">
+                            <label for="h2-color">H2 Color</label>
+                            <input type="color" id="h2-color" value="#3498db">
+                        </div>
+                        <div class="control">
+                            <label for="h3-color">H3 Color</label>
+                            <input type="color" id="h3-color" value="#2ecc71">
+                        </div>
+                    </div>
+
+                    <!-- Watermark Controls -->
+                    <div class="control-group">
+                        <h3>Watermark Settings</h3>
+                        <div class="control">
+                            <label for="watermark-text">Watermark Text</label>
+                            <input type="text" id="watermark-text" placeholder="Enter watermark text">
+                        </div>
+                        <div class="control">
+                            <label for="watermark-size">Watermark Size (px)</label>
+                            <input type="number" id="watermark-size" min="12" max="200" value="48">
+                        </div>
+                        <div class="control">
+                            <label for="watermark-color">Watermark Color</label>
+                            <input type="color" id="watermark-color" value="#000000">
+                        </div>
+                        <div class="control">
+                            <label for="watermark-position">Position</label>
+                            <select id="watermark-position">
+                                <option value="top-center">Top Center</option>
+                                <option value="bottom-center">Bottom Center</option>
+                                <option value="top-right">Top Right</option>
+                                <option value="bottom-left">Bottom Left</option>
+                            </select>
+                        </div>
+                        <div class="control">
+                            <label for="watermark-repeat">Repeat</label>
+                            <input type="checkbox" id="watermark-repeat">
+                        </div>
+                    </div>
+
+                    <!-- Doctor's Name -->
+                    <div class="control-group">
+                        <h3>Doctor's Name</h3>
+                        <div class="control">
+                            <label for="doctor-name">Name</label>
+                            <input type="text" id="doctor-name" placeholder="Enter doctor's name">
+                        </div>
+                        <div class="control">
+                            <label for="doctor-color">Color</label>
+                            <input type="color" id="doctor-color" value="#000000">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer role="contentinfo">
+        <p>&copy; 2024 Markdown Editor. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Configuration
+        const config = {
+            fontFamily: 'Patrick Hand',
+            fontSize: 16,
+            colors: {
+                background: '#ffffff',
+                text: '#000000',
+                bold: '#000000',
+                link: '#3498db',
+                h1: '#2c3e50',
+                h2: '#3498db',
+                h3: '#2ecc71'
+            },
+            watermark: {
+                text: '',
+                size: 48,
+                color: '#000000',
+                position: 'top-center',
+                repeat: false
+            },
+            doctor: {
+                name: '',
+                color: '#000000'
+            }
+        };
+
+        // Elements
+        const editor = document.getElementById('markdown-editor');
+        const preview = document.getElementById('markdown-preview');
+        const saveBtn = document.getElementById('save-btn');
+        const clearBtn = document.getElementById('clear-btn');
+        const previewBtn = document.getElementById('preview-btn');
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = themeToggle.querySelector('.theme-icon');
+
+        // Theme handling
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        let currentTheme = localStorage.getItem('theme') || 'dark';
+        
+        function setTheme(theme) {
+            document.body.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            themeIcon.textContent = theme === 'dark' ? '☀️' : '🌓';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(currentTheme);
+        });
+
+        // Initialize theme
+        setTheme(currentTheme);
+
+        // Configure marked
+        marked.setOptions({
+            breaks: true,
+            gfm: true,
+            headerIds: true,
+            mangle: false
+        });
+
+        // Load saved content if exists
+        const savedContent = localStorage.getItem('markdown-content');
+        if (savedContent) {
+            editor.value = savedContent;
+            updatePreview();
+        }
+
+        // Update preview on input with debounce
+        let debounceTimer;
+        editor.addEventListener('input', () => {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(updatePreview, 100);
+        });
+
+        function updatePreview() {
+            preview.innerHTML = marked.parse(editor.value);
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightElement(block);
+            });
+        }
+
+        // Save content
+        saveBtn.addEventListener('click', () => {
+            localStorage.setItem('markdown-content', editor.value);
+            showNotification('Content saved!');
+        });
+
+        // Clear content
+        clearBtn.addEventListener('click', () => {
+            if (confirm('Are you sure you want to clear the editor?')) {
+                editor.value = '';
+                preview.innerHTML = '';
+                localStorage.removeItem('markdown-content');
+            }
+        });
+
+        // Preview in new window
+        previewBtn.addEventListener('click', () => {
+            const previewWindow = window.open('', '_blank');
+            previewWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Markdown Preview</title>
+                    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+                    <style>
+                        body { 
+                            font-family: 'Patrick Hand', cursive;
+                            font-size: ${config.fontSize}px;
+                            color: ${config.colors.text};
+                            background-color: ${config.colors.background};
+                            padding: 2rem;
+                            position: relative;
+                        }
+                        h1 { color: ${config.colors.h1}; }
+                        h2 { color: ${config.colors.h2}; }
+                        h3 { color: ${config.colors.h3}; }
+                        a { color: ${config.colors.link}; }
+                        .watermark {
+                            position: fixed;
+                            opacity: 0.1;
+                            z-index: -1;
+                            pointer-events: none;
+                            font-family: 'Patrick Hand', cursive;
+                            font-size: ${config.watermark.size || 48}px;
+                            color: ${config.watermark.color || '#000000'};
+                        }
+                        .watermark.top-center {
+                            top: 20%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                        }
+                        .watermark.bottom-center {
+                            bottom: 20%;
+                            left: 50%;
+                            transform: translate(-50%, 50%);
+                        }
+                        .watermark.top-right {
+                            top: 20%;
+                            right: 10%;
+                        }
+                        .watermark.bottom-left {
+                            bottom: 20%;
+                            left: 10%;
+                        }
+                        .watermark.repeat {
+                            position: absolute;
+                            width: 100%;
+                            height: 100%;
+                            background-image: repeating-linear-gradient(
+                                45deg,
+                                transparent,
+                                transparent 10px,
+                                rgba(0,0,0,0.1) 10px,
+                                rgba(0,0,0,0.1) 20px
+                            );
+                        }
+                    </style>
+                </head>
+                <body>
+                    ${config.watermark.text ? `
+                        <div class="watermark ${config.watermark.position} ${config.watermark.repeat ? 'repeat' : ''}">
+                            ${config.watermark.repeat ? '' : config.watermark.text}
+                        </div>
+                    ` : ''}
+                    ${marked.parse(editor.value)}
+                    ${config.doctor.name ? `<div style="text-align: right; color: ${config.doctor.color}">${config.doctor.name}</div>` : ''}
+                </body>
+                </html>
+            `);
+        });
+
+        // Handle keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                e.preventDefault();
+                saveBtn.click();
+            }
+        });
+
+        // Notification system
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), 2000);
+        }
+
+        // Initialize controls
+        document.querySelectorAll('.control input, .control select').forEach(control => {
+            control.addEventListener('change', updateStyles);
+        });
+
+        function updateStyles() {
+            // Update config
+            config.fontFamily = document.getElementById('font-family').value;
+            config.fontSize = document.getElementById('font-size').value;
+            config.colors.background = document.getElementById('bg-color').value;
+            config.colors.text = document.getElementById('text-color').value;
+            config.colors.bold = document.getElementById('bold-color').value;
+            config.colors.link = document.getElementById('link-color').value;
+            config.colors.h1 = document.getElementById('h1-color').value;
+            config.colors.h2 = document.getElementById('h2-color').value;
+            config.colors.h3 = document.getElementById('h3-color').value;
+            config.watermark.text = document.getElementById('watermark-text').value;
+            config.watermark.size = document.getElementById('watermark-size').value;
+            config.watermark.color = document.getElementById('watermark-color').value;
+            config.watermark.position = document.getElementById('watermark-position').value;
+            config.watermark.repeat = document.getElementById('watermark-repeat').checked;
+            config.doctor.name = document.getElementById('doctor-name').value;
+            config.doctor.color = document.getElementById('doctor-color').value;
+
+            // Apply styles
+            document.documentElement.style.setProperty('--font-family', config.fontFamily);
+            document.documentElement.style.setProperty('--font-size', `${config.fontSize}px`);
+            document.documentElement.style.setProperty('--background-color', config.colors.background);
+            document.documentElement.style.setProperty('--text-color', config.colors.text);
+            document.documentElement.style.setProperty('--bold-color', config.colors.bold);
+            document.documentElement.style.setProperty('--link-color', config.colors.link);
+            document.documentElement.style.setProperty('--h1-color', config.colors.h1);
+            document.documentElement.style.setProperty('--h2-color', config.colors.h2);
+            document.documentElement.style.setProperty('--h3-color', config.colors.h3);
+        }
+    </script>
+</body>
+</html> 
