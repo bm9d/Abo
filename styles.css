@@ -1,49 +1,236 @@
 :root {
-    /* Dark theme colors */
-    --primary-color: #3498db;
-    --secondary-color: #2ecc71;
-    --accent-color: #e74c3c;
-    --text-color: #ecf0f1;
-    --text-color-light: #bdc3c7;
-    --bold-color: #ffffff;
-    --background-color: #1a1a1a;
-    --surface-color: #2d2d2d;
-    --border-color: #404040;
-    --code-bg: #1e1e1e;
+    /* Futuristic Dark theme colors */
+    --primary-color: #00F5FF;
+    --secondary-color: #FF00FF;
+    --accent-color: #00FF9D;
+    --text-color: #E0E0E0;
+    --text-color-light: #B0B0B0;
+    --bold-color: #FFFFFF;
+    --background-color: #0A0A0F;
+    --surface-color: rgba(20, 20, 30, 0.8);
+    --border-color: rgba(0, 245, 255, 0.2);
+    --code-bg: #0F0F1A;
     --header-height: 60px;
-    --editor-bg: #2d2d2d;
-    --preview-bg: #1a1a1a;
-    --shadow-color: rgba(0, 0, 0, 0.3);
-    --success-color: #2ecc71;
-    --error-color: #e74c3c;
-    --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    --editor-bg: rgba(20, 20, 30, 0.8);
+    --preview-bg: #0A0A0F;
+    --shadow-color: rgba(0, 245, 255, 0.1);
+    --success-color: #00FF9D;
+    --error-color: #FF00FF;
+    --font-family: 'Rajdhani', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     --preview-font-family: 'Patrick Hand', cursive;
     --font-size: 16px;
-    --h1-color: #3498db;
-    --h2-color: #2ecc71;
-    --h3-color: #e74c3c;
-    --link-color: #3498db;
+    --h1-color: #00F5FF;
+    --h2-color: #FF00FF;
+    --h3-color: #00FF9D;
+    --link-color: #00F5FF;
+    --neon-glow: 0 0 10px rgba(0, 245, 255, 0.5),
+                 0 0 20px rgba(0, 245, 255, 0.3),
+                 0 0 30px rgba(0, 245, 255, 0.1);
 }
 
-/* Light theme colors */
+/* Futuristic Light theme colors */
 [data-theme="light"] {
-    --primary-color: #2c3e50;
-    --secondary-color: #3498db;
-    --accent-color: #e74c3c;
-    --text-color: #2c3e50;
-    --text-color-light: #7f8c8d;
-    --bold-color: #000000;
-    --background-color: #f8f9fa;
-    --surface-color: #ffffff;
-    --border-color: #e0e0e0;
-    --code-bg: #f4f4f4;
-    --editor-bg: #f8f9fa;
-    --preview-bg: #ffffff;
-    --shadow-color: rgba(0, 0, 0, 0.1);
-    --h1-color: #2c3e50;
-    --h2-color: #3498db;
-    --h3-color: #2ecc71;
-    --link-color: #3498db;
+    --primary-color: #00F5FF;
+    --secondary-color: #FF00FF;
+    --accent-color: #00FF9D;
+    --text-color: #1A1A2E;
+    --text-color-light: #4A4A6A;
+    --bold-color: #1A1A2E;
+    --background-color: #F0F0FF;
+    --surface-color: rgba(255, 255, 255, 0.8);
+    --border-color: rgba(0, 245, 255, 0.2);
+    --code-bg: #F0F0FF;
+    --editor-bg: rgba(255, 255, 255, 0.8);
+    --preview-bg: #F0F0FF;
+    --shadow-color: rgba(0, 245, 255, 0.1);
+    --h1-color: #00F5FF;
+    --h2-color: #FF00FF;
+    --h3-color: #00FF9D;
+    --link-color: #00F5FF;
+}
+
+/* Import futuristic font */
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+/* Glassmorphism effect */
+.glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Button styles */
+.button {
+    padding: 0.5rem 1.5rem;
+    border: 2px solid var(--primary-color);
+    border-radius: 4px;
+    background-color: transparent;
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--primary-color);
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.button:hover {
+    color: var(--background-color);
+    box-shadow: var(--neon-glow);
+}
+
+.button:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Control group styles */
+.control-group {
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    background: var(--surface-color);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.control-group:hover {
+    box-shadow: var(--neon-glow);
+    transform: translateY(-2px);
+}
+
+.control-group h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Input styles */
+.control input[type="text"],
+.control input[type="number"],
+.control select {
+    width: auto;
+    min-width: 120px;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: var(--surface-color);
+    color: var(--text-color);
+    font-family: var(--font-family);
+    transition: all 0.3s ease;
+}
+
+.control input[type="text"]:focus,
+.control input[type="number"]:focus,
+.control select:focus {
+    border-color: var(--primary-color);
+    box-shadow: var(--neon-glow);
+    outline: none;
+}
+
+.control input[type="color"] {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: var(--surface-color);
+}
+
+.control input[type="color"]:hover {
+    border-color: var(--primary-color);
+    box-shadow: var(--neon-glow);
+    transform: scale(1.05);
+}
+
+/* Header styles */
+header {
+    background: var(--surface-color);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-shadow: var(--neon-glow);
+    font-family: 'Rajdhani', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Editor and Preview sections */
+.editor, .preview {
+    background: var(--surface-color);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.editor:focus, .preview:hover {
+    box-shadow: var(--neon-glow);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--background-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+    box-shadow: var(--neon-glow);
+}
+
+/* Animation for theme toggle */
+.theme-icon {
+    transition: transform 0.3s ease;
+}
+
+.theme-icon:hover {
+    transform: rotate(180deg);
+    text-shadow: var(--neon-glow);
 }
 
 * {
@@ -85,16 +272,6 @@ h5 { font-size: 1.25rem; }
 h6 { font-size: 1rem; }
 
 /* Header */
-header {
-    background-color: var(--surface-color);
-    color: var(--text-color);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 4px var(--shadow-color);
-}
-
 nav {
     display: flex;
     justify-content: space-between;
@@ -105,45 +282,10 @@ nav {
     margin: 0 auto;
 }
 
-.logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--primary-color);
-}
-
 .nav-controls {
     display: flex;
     gap: 1rem;
     align-items: center;
-}
-
-.button {
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 4px;
-    background-color: var(--primary-color);
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-size: 0.9rem;
-}
-
-.button:hover {
-    background-color: var(--secondary-color);
-}
-
-.icon-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
-    font-size: 1.2rem;
-    color: var(--text-color);
-    transition: transform 0.3s ease;
-}
-
-.icon-button:hover {
-    transform: scale(1.1);
 }
 
 /* Main content */
@@ -157,7 +299,7 @@ main {
 
 .editor-container {
     display: grid;
-    grid-template-columns: 1fr 1fr 300px;
+    grid-template-columns: 1fr 1fr;
     gap: 2rem;
     height: calc(100vh - var(--header-height) - 4rem);
 }
@@ -208,6 +350,7 @@ main {
     font-family: var(--preview-font-family);
 }
 
+/* Watermark styles */
 .preview .watermark {
     position: absolute;
     opacity: 0.1;
@@ -215,7 +358,8 @@ main {
     pointer-events: none;
     font-family: var(--preview-font-family);
     font-size: 48px;
-    color: var(--text-color);
+    color: var(--primary-color);
+    text-shadow: var(--neon-glow);
 }
 
 .preview .watermark.top-center {
@@ -248,8 +392,8 @@ main {
         45deg,
         transparent,
         transparent 10px,
-        rgba(0,0,0,0.1) 10px,
-        rgba(0,0,0,0.1) 20px
+        rgba(0, 245, 255, 0.1) 10px,
+        rgba(0, 245, 255, 0.1) 20px
     );
 }
 
@@ -260,63 +404,50 @@ main {
 }
 
 /* Controls */
-.controls-wrapper {
+.controls-section {
+    position: fixed;
+    right: 0;
+    top: var(--header-height);
+    bottom: 0;
+    width: 300px;
     background-color: var(--surface-color);
     padding: 1.5rem;
     overflow-y: auto;
-}
-
-.control-group {
-    margin-bottom: 2rem;
-}
-
-.control-group h3 {
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-    font-size: 1.1rem;
+    box-shadow: -2px 0 4px var(--shadow-color);
+    z-index: 100;
 }
 
 .control {
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .control label {
-    display: inline-block;
-    margin-bottom: 0.5rem;
+    flex: 1;
+    margin-right: 1rem;
     color: var(--text-color);
     font-size: 0.9rem;
-    vertical-align: middle;
-    margin-right: 10px;
 }
 
-.control input[type="text"],
-.control input[type="number"],
-.control select {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    background-color: var(--editor-bg);
-    color: var(--text-color);
-    font-family: var(--font-family);
-    transition: border-color 0.3s ease;
-}
-
-.control input[type="color"] {
-    width: 40px;
-    height: 40px;
-    padding: 0;
+/* Icon button styles */
+.icon-button {
+    background: none;
     border: none;
-    border-radius: 4px;
     cursor: pointer;
-    margin-right: 10px;
-    vertical-align: middle;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+    text-shadow: var(--neon-glow);
 }
 
-.control input[type="checkbox"] {
-    margin-right: 0.5rem;
+.icon-button:hover {
+    transform: scale(1.1);
+    text-shadow: 0 0 10px var(--primary-color),
+                 0 0 20px var(--primary-color),
+                 0 0 30px var(--primary-color);
 }
 
 /* Markdown content styling */
@@ -329,17 +460,22 @@ main {
 .markdown-content b {
     color: var(--bold-color);
     font-weight: 700;
+    text-shadow: var(--neon-glow);
 }
 
 .markdown-content a {
     color: var(--link-color);
     text-decoration: none;
     border-bottom: 1px solid transparent;
-    transition: border-color 0.3s ease;
+    transition: all 0.3s ease;
+    text-shadow: var(--neon-glow);
 }
 
 .markdown-content a:hover {
     border-bottom-color: var(--link-color);
+    text-shadow: 0 0 10px var(--link-color),
+                 0 0 20px var(--link-color),
+                 0 0 30px var(--link-color);
 }
 
 .markdown-content code {
@@ -348,6 +484,7 @@ main {
     padding: 0.2em 0.4em;
     border-radius: 3px;
     font-size: 0.9em;
+    border: 1px solid var(--border-color);
 }
 
 .markdown-content pre {
@@ -356,6 +493,8 @@ main {
     border-radius: 8px;
     overflow-x: auto;
     margin: 1.5rem 0;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--neon-glow);
 }
 
 .markdown-content blockquote {
@@ -363,6 +502,9 @@ main {
     padding-left: 1.5rem;
     margin: 1.5rem 0;
     color: var(--text-color-light);
+    background: var(--surface-color);
+    border-radius: 0 8px 8px 0;
+    box-shadow: var(--neon-glow);
 }
 
 .markdown-content ul, .markdown-content ol {
@@ -378,6 +520,8 @@ main {
     width: 100%;
     border-collapse: collapse;
     margin: 1.5rem 0;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--neon-glow);
 }
 
 .markdown-content th, .markdown-content td {
@@ -388,19 +532,24 @@ main {
 .markdown-content th {
     background-color: var(--code-bg);
     font-weight: 600;
+    color: var(--primary-color);
+    text-shadow: var(--neon-glow);
 }
 
-/* Notification */
+/* Notification styles */
 .notification {
     position: fixed;
     bottom: 1rem;
     right: 1rem;
     padding: 1rem 2rem;
-    background-color: var(--success-color);
-    color: white;
+    background-color: var(--surface-color);
+    color: var(--primary-color);
     border-radius: 4px;
-    box-shadow: 0 2px 4px var(--shadow-color);
+    box-shadow: var(--neon-glow);
     animation: slideIn 0.3s ease, fadeOut 0.3s ease 1.7s;
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 @keyframes slideIn {
@@ -416,12 +565,15 @@ main {
 /* Responsive design */
 @media (max-width: 1200px) {
     .editor-container {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
     }
 
     .controls-section {
-        grid-column: span 2;
-        height: auto;
+        position: relative;
+        width: 100%;
+        top: auto;
+        bottom: auto;
+        box-shadow: none;
     }
 }
 
@@ -430,9 +582,14 @@ main {
         grid-template-columns: 1fr;
     }
 
-    .editor-section, .preview-section, .controls-section {
+    .editor-section, .preview-section {
         height: auto;
         min-height: 50vh;
+    }
+
+    .controls-section {
+        position: relative;
+        width: 100%;
     }
 
     nav {
